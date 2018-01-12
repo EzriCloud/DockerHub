@@ -1,0 +1,21 @@
+FROM ruby:2.1.6
+MAINTAINER docker@ezricloud.com
+
+ENV RAILS_VERSION=4.2.1
+
+# Install apt based dependencies required to run Rails as 
+# well as RubyGems. As the Ruby image itself is based on a 
+# Debian image, we use apt-get to install those.
+
+
+RUN apt-get update && apt-get install -y \ 
+  build-essential \ 
+  nodejs
+
+# Install tools standard to our API development environment
+# App specific dependencies should go in Gemfile
+
+RUN gem install rails -v $RAILS_VERSION && \
+    gem install gemrat && \
+    gem install bundler
+
